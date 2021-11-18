@@ -16,6 +16,7 @@ ul{
 ul li{
   list-style: none;
   margin-left: 20px;
+  font-size: 20px;
 }
 
 ul li a{
@@ -29,3 +30,5 @@ ul li a:hover{
   background: white;
   color: #2b1055;
 }
+
+
