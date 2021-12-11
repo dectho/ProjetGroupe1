@@ -9,7 +9,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import { LineUpComponent } from './line-up/line-up.component';
 import { MerchandiseComponent } from './merchandise/merchandise.component';
 import { TicketsComponent } from './tickets/tickets.component';
-import {GoogleMapsModule} from "@angular/google-maps";
+import { MapComponent } from './info/map/map.component';
+
 
 @NgModule({
   declarations: [
@@ -19,12 +20,12 @@ import {GoogleMapsModule} from "@angular/google-maps";
     HomeComponent,
     LineUpComponent,
     MerchandiseComponent,
-    TicketsComponent
+    TicketsComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    GoogleMapsModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
