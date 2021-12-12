@@ -9,7 +9,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import { LineUpComponent } from './line-up/line-up.component';
 import { MerchandiseComponent } from './merchandise/merchandise.component';
 import { TicketsComponent } from './tickets/tickets.component';
-import { MapComponent } from './info/map/map.component';
+import {HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -20,12 +21,13 @@ import { MapComponent } from './info/map/map.component';
     HomeComponent,
     LineUpComponent,
     MerchandiseComponent,
-    TicketsComponent,
-    MapComponent
+    TicketsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

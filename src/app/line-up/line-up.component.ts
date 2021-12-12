@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Music} from "../music";
+import {MusicService} from "../music.service";
+
 
 @Component({
   selector: 'app-line-up',
@@ -7,11 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LineUpComponent implements OnInit {
 
-  constructor() { }
+  musics: Music[] = [];
+
+  constructor(private musicService : MusicService) { }
 
 
   ngOnInit(): void {
+    this.getAllMusics();
   }
 
+  private getAllMusics() {
+    this.musicService.getAll().subscribe(musics => this.musics = musics);
+  }
 }
 
