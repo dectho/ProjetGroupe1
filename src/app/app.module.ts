@@ -11,6 +11,7 @@ import { MerchandiseComponent } from './merchandise/merchandise.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     HomeComponent,
     LineUpComponent,
     MerchandiseComponent,
-    TicketsComponent
+    TicketsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

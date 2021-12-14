@@ -1,4 +1,4 @@
-.logo{
+.logo {
   color: #2b1055;
   font-weight: 700;
   text-decoration: none;
@@ -7,28 +7,27 @@
   letter-spacing: 2px;
 }
 
-ul{
+ul {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-ul li{
+ul li {
   list-style: none;
-  margin-left: 20px;
-  font-size: 20px;
+  margin-left: 3%;
+  font-size: 1.7vw;
 }
 
-ul li a{
+ul li a {
   text-decoration: none;
   padding: 6px 15px;
   color: #2b1055;
   border-radius: 20px;
 }
 
-ul li a:hover{
+ul li a:hover {
   background: white;
   color: #2b1055;
 }
-
 

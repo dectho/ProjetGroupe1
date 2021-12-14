@@ -6,6 +6,7 @@ import {HomeComponent} from "./home/home.component";
 import {MerchandiseComponent} from "./merchandise/merchandise.component";
 import {LineUpComponent} from "./line-up/line-up.component";
 import {TicketsComponent} from "./tickets/tickets.component";
+import {LoginComponent} from "./login/login.component";
 
 //IMPORT APPROUTINGMODULE DANS APPMODULE
 const routes:Routes = [
@@ -26,10 +27,10 @@ const routes:Routes = [
   },
   {
     path:'tickets', component: TicketsComponent
-  }//,
-  //{
-    //path:'media', component: MediaComponent
-  //}
+  },
+  {
+    path:'login', component: LoginComponent
+  }
 ];
 
 
