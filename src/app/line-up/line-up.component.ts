@@ -12,6 +12,7 @@ export class LineUpComponent implements OnInit {
 
   musics: Music[] = [];
 
+
   constructor(private musicService : MusicService) { }
 
 

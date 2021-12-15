@@ -1,13 +1,3 @@
-/*.container*/
-/*{*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  justify-content: space-around;*/
-/*  font-size: 20px;*/
-/*  padding-bottom: 30px;*/
-
-/*}*/
-
 .title {
   text-align: center;
   padding-top: 150px;
@@ -40,6 +30,8 @@ h2 {
   max-height: 11em;
 }
 
+
+
 figure {
   border: 5px solid white;
   width: auto;
@@ -55,9 +47,8 @@ figure {
 figcaption {
   background-color: #222;
   color: #fff;
-  font: italic smaller sans-serif;
+  font: italic bold smaller sans-serif;
   padding: 3px;
   text-align: center;
 }
-
 
