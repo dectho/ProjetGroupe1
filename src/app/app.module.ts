@@ -10,8 +10,9 @@ import { LineUpComponent } from './line-up/line-up.component';
 import { MerchandiseComponent } from './merchandise/merchandise.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import {HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './login/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -23,13 +24,15 @@ import { LoginComponent } from './login/login.component';
     LineUpComponent,
     MerchandiseComponent,
     TicketsComponent,
-    LoginComponent
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
