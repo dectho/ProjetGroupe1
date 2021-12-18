@@ -1,18 +1,7 @@
 <div class="container">
   <h1 class="title">LINE-UP</h1>
 
-  <!--Test liaison BD avec Music + affichage-->
-  <div *ngIf="artists.length === 0">
-    <b>Merci de créer une musique pour voir le tableau !</b>
-  </div>
-
-  <table>
-    <tr *ngFor="let artist of artists; let i = index">
-      <li>{{artist.id}}</li>
-      <li>{{artist.stageName}}</li>
-      <li>{{getMusicTitle(artist.idMusic)}}</li>
-    </tr>
-  </table>
+<app-artist-list [artists]="artists"></app-artist-list>
 
 
   <div class="containerPhoto">
