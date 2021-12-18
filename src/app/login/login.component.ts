@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
   submitted = false;
   //returnUrl: string;
   error = '';
+  email: string = "";
+  password: string = "";
+  connected: boolean = false;
 
   constructor(
     private router: Router,
@@ -25,5 +28,11 @@ export class LoginComponent implements OnInit {
 
   signup() {
     this.router.navigate(['signup']);
+  }
+
+  isConnected() {
+    if(this.email == "test" && this.password == "test"){
+      this.connected = true;
+    }
   }
 }

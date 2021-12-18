@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ArtistListComponent } from './line-up/artist-list/artist-list.component';
+import { ArtistFormComponent } from './line-up/artist-form/artist-form.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ArtistListComponent } from './line-up/artist-list/artist-list.component
     TicketsComponent,
     LoginComponent,
     SignUpComponent,
-    ArtistListComponent
+    ArtistListComponent,
+    ArtistFormComponent
   ],
   imports: [
     BrowserModule,

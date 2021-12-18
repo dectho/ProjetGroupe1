@@ -5,7 +5,7 @@
 
 <table>
   <tr *ngFor="let artist of artists; let i = index">
-    <li>{{artist.id}}</li>
+<!--    <li>{{artist.id}}</li>-->
     <li>{{artist.stageName}}</li>
     <li>{{getMusicTitle(artist.idMusic)}}</li>
     <li>{{getScheduleStart(artist.idSchedule) | date:'dd/MM/YY hh:mm'}}</li>

@@ -4,15 +4,15 @@
     <form action="#">
       <div class="field email">
         <div class="input-area">
-          <input type="text" placeholder="Email Address">
+          <input type="text" placeholder="Email Address" [(ngModel)]="email">
         </div>
       </div>
       <div class="field password">
         <div class="input-area">
-          <input type="password" placeholder="Password">
+          <input type="password" placeholder="Password" [(ngModel)]="password">
         </div>
       </div>
-      <input type="submit" value="Login">
+      <input type="submit" value="Login" (click)="isConnected()">
     </form>
    <div class="sign-txt">Not yet member ? <a (click)="signup()" >Sign up now !</a></div>
   </div>
