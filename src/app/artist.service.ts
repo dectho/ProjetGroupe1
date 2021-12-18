@@ -27,9 +27,9 @@ export class ArtistService {
     return this.httpClient.get(ArtistService.API_URL +"/"+id);
   }
 
-  create(artist : Artist):Observable<Music>
+  create(artist : Artist):Observable<Artist>
   {
-    return this.httpClient.post<Music>(ArtistService.API_URL, artist);
+    return this.httpClient.post<Artist>(ArtistService.API_URL, artist);
   }
 
   delete(id:Guid):Observable<any>

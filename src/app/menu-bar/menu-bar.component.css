@@ -33,3 +33,10 @@ ul li a:hover {
   max-height: 10%;
   width: 100%;
 }
+
+.active
+{
+  font-weight: bold;
+  font-style: italic;
+  text-transform: uppercase;
+}

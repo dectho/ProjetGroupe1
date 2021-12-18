@@ -1,1 +1,24 @@
-<p>artist-form works!</p>
+<form [formGroup]="form" (ngSubmit)="emitArtistCreation()">
+
+  <label>
+    Stage name :
+    <input type="text" formControlName="stageName" placeholder="Stage name">
+    <br>
+    Music name :
+    <input type="text" formControlName="musicName" placeholder="Music name">
+    <br>
+    Music link :
+    <input type="text" formControlName="linkMusic" placeholder="Music link">
+    <br>
+    Start time :
+    <input type="datetime-local" formControlName="scheduleStart" placeholder="Start time">
+    <br>
+    End time :
+    <input type="datetime-local" formControlName="scheduleEnd" placeholder="End time">
+    <br>
+
+
+  <input type="submit" value="Add artist" [disabled]="form.invalid">
+  </label>
+
+</form>

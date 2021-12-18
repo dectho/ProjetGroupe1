@@ -1,7 +1,9 @@
 <div class="container">
   <h1 class="title">LINE-UP</h1>
 
-<app-artist-list [artists]="artists"></app-artist-list>
+  <app-artist-list [artists]="artists"></app-artist-list>
+
+  <app-artist-form (artistCreated)="sendArtist($event)"></app-artist-form>
 
 
   <div class="containerPhoto">

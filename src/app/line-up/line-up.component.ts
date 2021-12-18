@@ -30,6 +30,10 @@ export class LineUpComponent implements OnInit {
 
   }
 
+  sendArtist(artist: Artist) {
+    this.artistService.create(artist).subscribe(artist => this.artists.push(artist));
+  }
+
 
 }
 
