@@ -31,3 +31,9 @@ ul li a:hover {
   color: #2b1055;
 }
 
+.logo
+{
+  max-width: 13%;
+  max-height: 13%;
+}
+

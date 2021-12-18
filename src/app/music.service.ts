@@ -3,6 +3,7 @@ import {environment} from "../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Music} from "./music";
+import {Guid} from "guid-typescript";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class MusicService {
     return this.httpClient.get<Music[]>(MusicService.API_URL);
   }
 
-  getById(id:number):Observable<any>
+  getById(id:Guid):Observable<any>
   {
     return this.httpClient.get(MusicService.API_URL +"/"+id);
   }
@@ -30,12 +31,12 @@ export class MusicService {
     return this.httpClient.post<Music>(MusicService.API_URL, music);
   }
 
-  delete(id:number):Observable<any>
+  delete(id:Guid):Observable<any>
   {
     return this.httpClient.delete(MusicService.API_URL + "/" + id);
   }
 
-  update(id:number, music : Music)
+  update(id:Guid, music : Music)
   {
     return this.httpClient.put(MusicService.API_URL + "/" + id, music);
   }

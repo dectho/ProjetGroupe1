@@ -4,10 +4,8 @@ import {Guid} from "guid-typescript";
 
 //npm i guid-typescript --save (Pour avoir le type Guid)
 export interface Artist {
-  id?:Guid;
+  id:Guid;
   stageName:string;
-  idMusic:number;
-  idSchedule:number;
-  music:Music;
-  shchedule:Schedule;
+  idMusic:Guid;
+  idSchedule:Guid;
 }

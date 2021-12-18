@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Music} from "./music";
 import {Schedule} from "./schedule";
+import {Guid} from "guid-typescript";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class ScheduleService {
     return this.httpClient.get<Schedule[]>(ScheduleService.API_URL);
   }
 
-  getById(id:number):Observable<any>
+  getById(id:Guid):Observable<any>
   {
     return this.httpClient.get(ScheduleService.API_URL +"/"+id);
   }
@@ -31,12 +32,12 @@ export class ScheduleService {
     return this.httpClient.post<Schedule>(ScheduleService.API_URL, schedule);
   }
 
-  delete(id:number):Observable<any>
+  delete(id:Guid):Observable<any>
   {
     return this.httpClient.delete(ScheduleService.API_URL + "/" + id);
   }
 
-  update(id:number, schedule : Schedule)
+  update(id:Guid, schedule : Schedule)
   {
     return this.httpClient.put(ScheduleService.API_URL + "/" + id, schedule);
   }

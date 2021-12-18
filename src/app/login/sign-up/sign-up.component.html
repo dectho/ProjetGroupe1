@@ -1,10 +1,10 @@
 <div class="contenair">
   <div class="wrapper">
-    <header>SIGN UP</header>
+    <header>Sign up</header>
     <form #form="ngForm">
       <div class="field email">
         <div class="input-area">
-          <input type="email" name="Email Adress" required placeholder="Email" [(ngModel)]="value.email">
+          <input type="email" name="Email Adress" required placeholder="Email Adress" [(ngModel)]="value.email">
         </div>
       </div>
       <div class="field password">
@@ -12,7 +12,7 @@
           <input type="password" name="Password" required placeholder="Password" [(ngModel)]="value.password">
         </div>
       </div>
-      <input type="submit" value="SIGN UP" [disabled]="form.invalid">
+      <input type="submit" value="Sign up" [disabled]="form.invalid">
     </form>
     <div class="sign-txt">Already member ? <a (click)="loginRoute()" >Sign up now !</a></div>
   </div>
