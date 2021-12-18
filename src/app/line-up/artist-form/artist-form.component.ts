@@ -5,6 +5,8 @@ import {Music} from "../../music";
 import {ArtistService} from "../../artist.service";
 import {Guid} from "guid-typescript";
 import {MusicService} from "../../music.service";
+import {Schedule} from "../../schedule";
+import {ScheduleService} from "../../schedule.service";
 
 @Component({
   selector: 'app-artist-form',
@@ -23,7 +25,7 @@ export class ArtistFormComponent implements OnInit {
     scheduleEnd : ['', Validators.required]
   });
 
-  constructor(private fb : FormBuilder, private artistService : ArtistService, private musicService : MusicService) { }
+  constructor(private fb : FormBuilder, private scheduleService : ScheduleService, private musicService : MusicService) { }
 
   ngOnInit(): void {
 
@@ -35,20 +37,25 @@ export class ArtistFormComponent implements OnInit {
     let guidSchedule : Guid = Guid.create();
 
     let music = <Music>{
-      id = guidMusic,
-      title = "a",
-      link = "a"
+      id: guidMusic,
+      title: this.form.value.title,
+      link: this.form.value.link
     };
 
-
-    (this.form.value.musicName, this.form.value.linkMusic);
+    let schedule = <Schedule>{
+      id: guidSchedule,
+      scheduleStart: this.form.value.scheduleStart,
+      scheduleEnd: this.form.value.scheduleEnd
+    };
 
     this.musicService.create(music).subscribe();
 
+    this.scheduleService.create(schedule).subscribe();
+
     this.artistCreated.next({
       stageName:this.form.value.stageName,
-      idMusic: this.form.value.musicName,
-      idSchedule : this.form.value.schedulEnd
+      idMusic: guidMusic,
+      idSchedule : guidSchedule
     });
   }
 
