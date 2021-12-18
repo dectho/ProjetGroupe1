@@ -53,14 +53,14 @@ export class ArtistFormComponent implements OnInit {
        id: guidArtist,
        stageName: this.form.value.stageName,
        idMusic:guidMusic,
-       idSchedule:guidSchedule,
-       music : music,
-       schedule : schedule
+       idSchedule:guidSchedule
      };
 
     this.musicService.create(music).subscribe();
 
+
     this.scheduleService.create(schedule).subscribe();
+
 
     this.artistCreated.next(artiste);
   }
