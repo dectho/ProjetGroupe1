@@ -13,6 +13,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
+import { ArtistListComponent } from './line-up/artist-list/artist-list.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
     MerchandiseComponent,
     TicketsComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    ArtistListComponent
   ],
   imports: [
     BrowserModule,

@@ -16,25 +16,13 @@ export class LineUpComponent implements OnInit {
 
   artists: Artist[] = [];
 
-  musics : Music [] = [];
 
-  constructor(private musicService : MusicService, private artistService : ArtistService) { }
+
+  constructor(private artistService : ArtistService) { }
 
 
   ngOnInit(): void {
     this.getAllArtists();
-    this.getAllMusics();
-  }
-
-  public getMusicTitle(id : Guid) : string{
-    for(let music of this.musics)
-    {
-      if(music.id == id)
-      {
-        return music.title;
-      }
-    }
-    return "";
   }
 
   private getAllArtists() {
@@ -42,8 +30,6 @@ export class LineUpComponent implements OnInit {
 
   }
 
-  private getAllMusics() {
-    this.musicService.getAll().subscribe(musics => this.musics = musics);
-  }
+
 }
 
