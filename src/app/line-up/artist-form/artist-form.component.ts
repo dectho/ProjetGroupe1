@@ -7,7 +7,6 @@ import {Guid} from "guid-typescript";
 import {MusicService} from "../../music.service";
 import {Schedule} from "../../schedule";
 import {ScheduleService} from "../../schedule.service";
-import {ArtistCreate} from "../../artist-create";
 
 @Component({
   selector: 'app-artist-form',
@@ -16,7 +15,7 @@ import {ArtistCreate} from "../../artist-create";
 })
 export class ArtistFormComponent implements OnInit {
 
-  @Output() artistCreated : EventEmitter<ArtistCreate> = new EventEmitter<ArtistCreate>();
+  @Output() artistCreated : EventEmitter<Artist> = new EventEmitter<Artist>();
 
   form:FormGroup = this.fb.group({
     stageName : ['', Validators.required],
@@ -36,7 +35,7 @@ export class ArtistFormComponent implements OnInit {
 
     let guidMusic : Guid = Guid.create();
     let guidSchedule : Guid = Guid.create();
-    //let guidArtist : Guid = Guid.create();
+    let guidArtist : Guid = Guid.create();
 
     let music = <Music>{
       id: guidMusic,
@@ -50,27 +49,20 @@ export class ArtistFormComponent implements OnInit {
       scheduleEnd: this.form.value.scheduleEnd
     };
 
-    // let  artiste = <Artist>{
-    //   id: guidArtist,
-    //   stageName: this.form.value.stageName,
-    //   idMusic:guidMusic,
-    //   idSchedule:guidSchedule
-    // };
+     let  artiste = <Artist>{
+       id: guidArtist,
+       stageName: this.form.value.stageName,
+       idMusic:guidMusic,
+       idSchedule:guidSchedule,
+       music : music,
+       schedule : schedule
+     };
 
-//    this.musicService.create(music).subscribe();
+    this.musicService.create(music).subscribe();
 
+    this.scheduleService.create(schedule).subscribe();
 
-//    this.scheduleService.create(schedule).subscribe();
-
-    // this.artistService.create(artiste).subscribe();
-
-
-
-    this.artistCreated.next({
-      stageName:this.form.value.stageName,
-      music : music,
-      schedule : schedule
-    });
+    this.artistCreated.next(artiste);
   }
 
 

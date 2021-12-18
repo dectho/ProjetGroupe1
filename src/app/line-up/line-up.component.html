@@ -1,9 +1,6 @@
 <div class="container">
   <h1 class="title">LINE-UP</h1>
 
-  <app-artist-list [artists]="artists"></app-artist-list>
-
-  <app-artist-form (artistCreated)="sendArtist($event)"></app-artist-form>
 
 
   <div class="containerPhoto">
@@ -91,11 +88,10 @@
   </div>
 
 
-  <h2>DATES</h2>
-  <div>The f-festival will take place between 12 July and 16 July 2022</div>
 
-  <h2>OPENING HOURS</h2>
-  <div>12:00 every day</div>
+  <app-artist-list [artists]="artists"></app-artist-list>
+
+  <app-artist-form (artistCreated)="sendArtist($event)"></app-artist-form>
 
 
 </div>

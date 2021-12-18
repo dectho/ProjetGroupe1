@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ArtistListComponent } from './line-up/artist-list/artist-list.component';
 import { ArtistFormComponent } from './line-up/artist-form/artist-form.component';
+import {MapComponent} from "./info/map/map.component";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ArtistFormComponent } from './line-up/artist-form/artist-form.component
     LoginComponent,
     SignUpComponent,
     ArtistListComponent,
-    ArtistFormComponent
+    ArtistFormComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
