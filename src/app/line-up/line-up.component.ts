@@ -5,6 +5,7 @@ import {Artist} from "../artist";
 import {ArtistService} from "../artist.service";
 import {Guid} from "guid-typescript";
 import {Observable} from "rxjs";
+import {ArtistCreate} from "../artist-create";
 
 
 @Component({
@@ -30,7 +31,7 @@ export class LineUpComponent implements OnInit {
 
   }
 
-  sendArtist(artist: Artist) {
+  sendArtist(artist: ArtistCreate) {
     this.artistService.create(artist).subscribe(artist => this.artists.push(artist));
   }
 

@@ -5,5 +5,4 @@ export interface Schedule {
   id?:Guid;
   scheduleStart:Date;
   scheduleEnd:Date;
-  datePresentation:Date;
 }

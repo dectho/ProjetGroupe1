@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {Music} from "./music";
 import {Artist} from "./artist";
 import {Guid} from "guid-typescript";
+import {ArtistCreate} from "./artist-create";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class ArtistService {
     return this.httpClient.get(ArtistService.API_URL +"/"+id);
   }
 
-  create(artist : Artist):Observable<Artist>
+  create(artist : ArtistCreate):Observable<Artist>
   {
     return this.httpClient.post<Artist>(ArtistService.API_URL, artist);
   }
