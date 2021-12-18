@@ -8,7 +8,7 @@
     <li>{{artist.id}}</li>
     <li>{{artist.stageName}}</li>
     <li>{{getMusicTitle(artist.idMusic)}}</li>
-    <li>{{getScheduleStart(artist.idSchedule) | date:'short'}}</li>
-    <li>{{getScheduleEnd(artist.idSchedule) | date:'short'}}</li>
+    <li>{{getScheduleStart(artist.idSchedule) | date:'dd/MM/YY hh:mm'}}</li>
+    <li>{{getScheduleEnd(artist.idSchedule) | date:'dd/MM/YY hh:mm'}}</li>
   </tr>
 </table>
