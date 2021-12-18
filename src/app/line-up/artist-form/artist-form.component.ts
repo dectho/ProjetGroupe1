@@ -7,6 +7,7 @@ import {Guid} from "guid-typescript";
 import {MusicService} from "../../music.service";
 import {Schedule} from "../../schedule";
 import {ScheduleService} from "../../schedule.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-artist-form',
@@ -33,37 +34,63 @@ export class ArtistFormComponent implements OnInit {
 
   emitArtistCreation() {
 
-    let guidMusic : Guid = Guid.create();
+    /*let guidMusic : Guid = Guid.create();
     let guidSchedule : Guid = Guid.create();
-    let guidArtist : Guid = Guid.create();
+    let guidArtist : Guid = Guid.create();*/
 
     let music = <Music>{
-      id: guidMusic,
       title: this.form.value.musicName,
       link: this.form.value.linkMusic
     };
 
     let schedule = <Schedule>{
-      id: guidSchedule,
       scheduleStart: this.form.value.scheduleStart,
       scheduleEnd: this.form.value.scheduleEnd
     };
 
-     let  artiste = <Artist>{
-       id: guidArtist,
-       stageName: this.form.value.stageName,
-       idMusic:guidMusic,
-       idSchedule:guidSchedule
-     };
-
     this.musicService.create(music).subscribe();
-
-
     this.scheduleService.create(schedule).subscribe();
 
+    let listeMusic: Observable<Music[]> = this.musicService.getAll();
+    //let listeSchedule: Observable<Schedule[]> = this.scheduleService.getAll();
 
-    this.artistCreated.next(artiste);
+    let guidM: Guid = Guid.createEmpty();
+    //let guidS: Guid = Guid.create();
+
+    listeMusic.subscribe(value => {
+      for (let i = 0; i < value.length; i++) {
+        if(value[i].title == "carnaval-song") {
+          guidM = value[i].id;
+          console.log(guidM);
+        }
+      }
+    });
+
+   /* listeSchedule.subscribe(value => {
+      for (let i = 0; i < value.length; i++) {
+        if(value[i].scheduleStart == schedule.scheduleStart) {
+          guidS = value[i].id;
+          console.log(guidS);
+        }
+      }
+    });*/
+
+    /*let guidMu: string = "29c48d19-63e1-4de7-97e5-08d9c24ae33f";
+    let guidUnk: unknown = guidMu as unknown;
+    let guidGuid: Guid = guidUnk as Guid;
+    console.log(guidGuid);*/
+
+    let guidMuS: string = "5377b98d-fb46-4199-80e1-08d9c24b06e5";
+    let guidUnkS: unknown = guidMuS as unknown;
+    let guidGuidS: Guid = guidUnkS as Guid;
+    console.log(guidGuidS);
+
+     let  artiste = <Artist>{
+       stageName: this.form.value.stageName,
+       idMusic: guidM,
+       idSchedule:guidGuidS
+     };
+
+    this.artistService.create(artiste).subscribe();
   }
-
-
 }
