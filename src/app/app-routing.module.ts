@@ -8,6 +8,7 @@ import {LineUpComponent} from "./line-up/line-up.component";
 import {TicketsComponent} from "./tickets/tickets.component";
 import {LoginComponent} from "./login/login.component";
 import {SignUpComponent} from "./login/sign-up/sign-up.component";
+import {AdminComponent} from "./admin/admin.component";
 
 //IMPORT APPROUTINGMODULE DANS APPMODULE
 const routes:Routes = [
@@ -34,6 +35,9 @@ const routes:Routes = [
   },
   {
     path:'signup', component: SignUpComponent
+  },
+  {
+    path:'admin', component: AdminComponent
   }
 ];
 

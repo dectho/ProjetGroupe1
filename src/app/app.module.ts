@@ -16,6 +16,8 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ArtistListComponent } from './line-up/artist-list/artist-list.component';
 import { ArtistFormComponent } from './line-up/artist-form/artist-form.component';
 import {MapComponent} from "./info/map/map.component";
+import {HomeLoginComponent} from "./login/homeLogin";
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {MapComponent} from "./info/map/map.component";
     SignUpComponent,
     ArtistListComponent,
     ArtistFormComponent,
-    MapComponent
+    MapComponent,
+    HomeLoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
