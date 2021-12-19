@@ -1,14 +1,19 @@
-<!--Test liaison BD avec Music + affichage-->
-<div *ngIf="artists.length === 0">
-  <b>Merci de créer une musique pour voir le tableau !</b>
-</div>
+<div class="policy-container" *ngIf="artists.length != 0">
+  <div class="policy-table">
+    <div class="headings">
+      <span class="heading">Name</span>
+      <span class="heading">Start of the show</span>
+      <span class="heading">End of the show</span>
+      <span class="heading">Most popular song</span>
+    </div>
 
-<table>
-  <tr *ngFor="let artist of artists; let i = index">
-<!--    <li>{{artist.id}}</li>-->
-    <li>{{artist.stageName}}</li>
-    <li>{{getMusicTitle(artist.idMusic)}}</li>
-    <li>{{getScheduleStart(artist.idSchedule) | date:'dd/MM/YY hh:mm'}}</li>
-    <li>{{getScheduleEnd(artist.idSchedule) | date:'dd/MM/YY hh:mm'}}</li>
-  </tr>
-</table>
+    <div class="policy" *ngFor="let artist of artists; let i = index">
+      <span>{{artist.stageName}}</span>
+      <span>{{getScheduleStart(artist.idSchedule) | date:'dd/MM/YY HH:mm'}}</span>
+      <span>{{getScheduleEnd(artist.idSchedule) | date:'dd/MM/YY HH:mm'}}</span>
+      <span>
+        <a href={{getMusicLink(artist.idMusic)}} target="_blank">{{getMusicTitle(artist.idMusic)}}</a>
+      </span>
+    </div>
+  </div>
+</div>

@@ -41,6 +41,17 @@ export class ArtistListComponent implements OnInit {
     return "";
   }
 
+  public getMusicLink(id : Guid) : string{
+    for(let music of this.musics)
+    {
+      if(music.id == id)
+      {
+        return music.link;
+      }
+    }
+    return "";
+  }
+
   private getAllScheduls() {
     this.schedulService.getAll().subscribe(scheduls => this.scheduls = scheduls);
   }
