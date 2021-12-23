@@ -36,7 +36,6 @@ export class LineUpComponent implements OnInit {
   sendArtist(art: Artist) {
     this.artistService.create(art).subscribe(artist =>
     {
-      debugger;
       art.idMusic = artist.music.id;
       art.idSchedule = artist.schedules.id;
       this.artists.push(art)

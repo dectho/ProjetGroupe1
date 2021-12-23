@@ -23,6 +23,7 @@ export class AuthManagementService implements  OnInit{
     this.eventBus.when(EventType.ADMIN_CONNECTED).subscribe(value =>
     {
       this.token = value;
+
     });
     this.eventBus.when(EventType.USER_CONNECTED).subscribe(value =>
     {

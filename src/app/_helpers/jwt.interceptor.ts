@@ -9,22 +9,16 @@ import {EventBusService} from "../event-bus/event-bus.service";
 
 
 @Injectable()
-export class JwtInterceptor implements HttpInterceptor, OnInit {
-    constructor(private authService : AuthManagementService, private eventBus : EventBusService) { }
+export class JwtInterceptor implements HttpInterceptor {
+    constructor(private authService : AuthManagementService) { }
 
   token : any;
 
-  ngOnInit() {
-    this.eventBus.when(EventType.ADMIN_CONNECTED).subscribe(value =>
-    {
-      this.token = value;
-    });
-    console.log(this.token);
-  }
-
   intercept(request: HttpRequest<unknown>,next: HttpHandler): Observable<HttpEvent<unknown>> {
+        let tok : any = localStorage.getItem("token");
+
         request = request.clone({
-        headers: request.headers.set('authorization', "Bearer " + this.token),
+        headers: request.headers.set('authorization', "Bearer " + tok),
       });
 
         return next.handle(request);
