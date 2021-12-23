@@ -80,9 +80,11 @@ export class LoginComponent implements OnInit {
         this.tokenDecoded = this.getDecodedAccessToken(this.token);
         //console.log(this.tokenDecoded.Id);
 
-        localStorage.setItem("token", JSON.stringify(this.tokenDecoded));
-        let tok : any = JSON.parse(<string>localStorage.getItem("token"));
+        //localStorage.setItem("token", JSON.stringify(this.tokenDecoded));
+        //let tok : any = JSON.parse(<string>localStorage.getItem("token"));
 
+        localStorage.setItem("token", this.token);
+        let tok : any = localStorage.getItem("token");
 
 
         if((user.pseudo == "test" && user.password == "Test1$") ||

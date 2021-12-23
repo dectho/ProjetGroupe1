@@ -19,10 +19,11 @@ export class JwtInterceptor implements HttpInterceptor, OnInit {
     {
       this.token = value;
     });
+    console.log(this.token);
   }
 
   intercept(request: HttpRequest<unknown>,next: HttpHandler): Observable<HttpEvent<unknown>> {
-      request = request.clone({
+        request = request.clone({
         headers: request.headers.set('authorization', "Bearer " + this.token),
       });
 

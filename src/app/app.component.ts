@@ -15,7 +15,7 @@ export class AppComponent implements OnDestroy{
   }
 
   ngOnInit(): void {
-    let token : any = JSON.parse(<string>localStorage.getItem("token"));
+    let token : any = localStorage.getItem("token");
     if(token == null)
     {
       this.eventBus.next({
