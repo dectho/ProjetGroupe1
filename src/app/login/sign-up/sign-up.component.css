@@ -94,3 +94,13 @@ form input[type="submit"]{
 form input[type="submit"]:hover{
   background: #b534e8;
 }
+
+.error{
+  color: red;
+  font-weight: bold;
+}
+
+form input[type="submit"]:disabled{
+  background: #a099a2;
+}
+

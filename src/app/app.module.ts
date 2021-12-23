@@ -18,6 +18,8 @@ import { ArtistFormComponent } from './line-up/artist-form/artist-form.component
 import {MapComponent} from "./info/map/map.component";
 import {HomeLoginComponent} from "./login/homeLogin";
 import { AdminComponent } from './admin/admin.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {JwtInterceptor} from "./_helpers";
 
 
 @NgModule({
@@ -42,9 +44,15 @@ import { AdminComponent } from './admin/admin.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [JwtInterceptor,
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

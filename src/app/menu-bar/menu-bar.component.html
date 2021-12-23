@@ -3,10 +3,11 @@
   <ul>
     <li><a routerLink="home" routerLinkActive="active">Home</a></li>
     <li><a routerLink="lineUp" routerLinkActive="active">Line-up</a></li>
-    <li><a routerLink="tickets" routerLinkActive="active">Tickets</a></li>
+    <li (click)="checkConnected()"><a routerLinkActive="active">Tickets</a></li>
     <li><a routerLink="info" routerLinkActive="active">Infos</a></li>
     <li><a routerLink="merchandise" routerLinkActive="active">Merchandise</a></li>
-    <li><a routerLink="login" routerLinkActive="active">Login</a></li>
+    <li *ngIf="connected==false"><a routerLink="login" routerLinkActive="active">Login</a></li>
+    <li *ngIf="connected==true"><a routerLink="Log Out" routerLinkActive="active" (click)="logOut()">Log Out</a></li>
   </ul>
   <router-outlet></router-outlet>
 </div>

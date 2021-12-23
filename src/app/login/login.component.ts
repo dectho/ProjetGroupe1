@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthenticationService} from "../services";
 import {first} from "rxjs/operators";
+import {AuthManagementService} from "../auth-management.service";
+import {User} from "../user";
+import {throwError} from "rxjs";
+import {Request} from "../request";
+import jwt_decode from 'jwt-decode';
+import {Guid} from "guid-typescript";
+import {EventBusService} from "../event-bus/event-bus.service";
+import {EventType} from "../event-bus/event-type";
 
 @Component({
   selector: 'app-login',
@@ -15,32 +22,42 @@ export class LoginComponent implements OnInit {
     pseudo: ['', Validators.required],
     password: ['', Validators.required]
   });
-  loading = false;
-  submitted = false;
-  returnUrl: string='';
-  error = 'error';
+  returnUrl: string = '';
+  errorBool: boolean = false;
 
-  connected: boolean = false;
+
+  value : any;
+  token : string;
+  tokenDecoded : any;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
-  ) { }
+    private authentificationService : AuthManagementService,
+    private eventBus:EventBusService
+  ) {
+  }
 
   ngOnInit() {
 
-/*
-    // reset login status
-    this.authenticationService.logout();
-*/
+    //let tok1 : any = JSON.parse(<string>localStorage.getItem("token"));
+    //console.log(tok1);
+
+    /*
+        // reset login status
+        this.authenticationService.logout();
+    */
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() {
+    return this.loginForm.controls;
+  }
 
   onSubmit() {
 
@@ -49,41 +66,82 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
-    this.submitted = true;
-    if(this.loginForm.value.pseudo == 'test' && this.loginForm.value.password == 'test'){
-      this.connected = true;
-      console.log(this.connected);
+    let user = <User>{
+      pseudo : this.f['pseudo'].value,
+      password : this.f['password'].value
+    };
+
+    this.authentificationService.login(user).subscribe(data =>
+      {
+
+        this.errorBool = false;
+        this.value = data;
+        this.token = this.value.token;
+        this.tokenDecoded = this.getDecodedAccessToken(this.token);
+        //console.log(this.tokenDecoded.Id);
+
+        localStorage.setItem("token", JSON.stringify(this.tokenDecoded));
+        let tok : any = JSON.parse(<string>localStorage.getItem("token"));
 
 
 
+        if((user.pseudo == "test" && user.password == "Test1$") ||
+          (user.pseudo == "admin" && user.password == "Helha1$") )
+        {
+          this.loginAdmin(this.token);
+        }
+        else
+        {
+          this.loginUser(this.token);
+        }
 
-
-    this.authenticationService.login(this.f['pseudo'].value, this.f['password'].value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(['admin']);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        });
-
-    }
+        //console.log(tok);
+        this.router.navigate(['lineUp']);
+      },
+      error => {
+        this.errorBool = true;
+      });
   }
 
+  loginAdmin(tok : any) {
+    this.eventBus.next({
+      type: EventType.ADMIN_CONNECTED,
+      data:tok
+    });
+
+  }
+
+  loginUser(tok : any) {
+    this.eventBus.next({
+      type: EventType.USER_CONNECTED,
+      data:tok
+    });
+
+  }
+
+  getDecodedAccessToken(token: string): any {
+    try{
+
+      return jwt_decode(token);
+    }
+    catch(Error){
+      return null;
+    }
 
 
+  }
 
 
   signup() {
     this.router.navigate(['signup']);
   }
-/*
-  isConnected() {
-    if(this.email == "test" && this.password == "test"){
-      this.connected = true;
-    }
-  }*/
+
+  autoComplete() {
+    this.loginForm.setValue(
+      {
+        pseudo : "test",
+        password : "Test1$"
+      }
+    );
+  }
 }

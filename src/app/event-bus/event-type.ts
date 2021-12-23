@@ -1,0 +1,6 @@
+export enum EventType {
+  ADMIN_CONNECTED,
+  USER_CONNECTED,
+  DISCONNECTED,
+  INIT
+}

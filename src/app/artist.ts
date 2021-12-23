@@ -8,6 +8,6 @@ export interface Artist {
   stageName:string;
   idMusic:Guid;
   idSchedule:Guid;
-  /*music:Music;
-  schedule:Schedule;*/
+  music:Music;
+  schedules:Schedule;
 }

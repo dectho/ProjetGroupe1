@@ -1,5 +1,15 @@
-label
-{
-  display: block;
-  width: 150px;
+label {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 18px;
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: right;
+  margin-right:15px;
+  float:left;
+}
+input {
+  height: 20px;
+  width: 300px;
+  border: 1px solid #000;
+  margin-top: 10px;
 }

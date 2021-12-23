@@ -5,15 +5,17 @@
       <span class="heading">Start of the show</span>
       <span class="heading">End of the show</span>
       <span class="heading">Most popular song</span>
+      <span *ngIf="adminConnectedBool == true" class="heading">Delete</span>
     </div>
 
     <div class="policy" *ngFor="let artist of artists; let i = index">
-      <span>{{artist.stageName}}</span>
+      <span >{{artist.stageName}}</span>
       <span>{{getScheduleStart(artist.idSchedule) | date:'dd/MM/YY HH:mm'}}</span>
       <span>{{getScheduleEnd(artist.idSchedule) | date:'dd/MM/YY HH:mm'}}</span>
       <span>
         <a href={{getMusicLink(artist.idMusic)}} target="_blank">{{getMusicTitle(artist.idMusic)}}</a>
       </span>
+      <span *ngIf="adminConnectedBool == true"><button (click)="emitTodoDeletedByIndex(i)">X</button></span>
     </div>
   </div>
 </div>

@@ -5,6 +5,8 @@ import {Artist} from "../artist";
 import {ArtistService} from "../artist.service";
 import {Guid} from "guid-typescript";
 import {Observable} from "rxjs";
+import {EventType} from "../event-bus/event-type";
+import {EventBusService} from "../event-bus/event-bus.service";
 
 
 @Component({
@@ -17,12 +19,13 @@ export class LineUpComponent implements OnInit {
   artists: Artist[] = [];
 
 
-
-  constructor(private artistService : ArtistService) { }
+  constructor(private artistService : ArtistService, private eventBus:EventBusService) { }
 
 
   ngOnInit(): void {
     this.getAllArtists();
+
+
   }
 
   private getAllArtists() {
@@ -30,8 +33,26 @@ export class LineUpComponent implements OnInit {
 
   }
 
-  sendArtist(artist: Artist) {
-    this.artistService.create(artist).subscribe(artist => this.artists.push(artist));
+  sendArtist(art: Artist) {
+    this.artistService.create(art).subscribe(artist =>
+    {
+      debugger;
+      art.idMusic = artist.music.id;
+      art.idSchedule = artist.schedules.id;
+      this.artists.push(art)
+    });
+  }
+
+  deleteArtist(artistDeleted: Artist) {
+    this.artistService.delete(artistDeleted.id || -1).subscribe(() => {
+      for (let i = 0; i < this.artists.length; i++) {
+        const artist = this.artists[i];
+        if (artist.id === artistDeleted.id) {
+          this.artists.splice(i, 1);
+          break;
+        }
+      }
+    });
   }
 
 

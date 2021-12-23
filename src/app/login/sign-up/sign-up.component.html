@@ -1,20 +1,28 @@
 <div class="contenair">
   <div class="wrapper">
-    <header>Sign up</header>
-    <form #form="ngForm">
-      <div class="field email">
-        <div class="input-area">
-          <input type="email" name="Email Adress" required placeholder="Email Adress" [(ngModel)]="value.email">
+    <header>Sign Up</header>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <div class="field email">
+          <div class="input-area">
+            <input type="text" id='pseudo' formControlName="pseudo" placeholder="Pseudo"/>
+
+          </div>
+        </div>
+        <div class="field password">
+          <div class="input-area">
+            <input type="password" id='password' formControlName="password" placeholder="Password"/>
+          </div>
+        </div>
+
+
+        <input type="submit" [disabled]="loginForm.invalid" value="Login">
+
+        <div *ngIf="errorBool" class="error">
+          <div class="error" *ngFor="let error of errorsString">{{error}}</div>
         </div>
       </div>
-      <div class="field password">
-        <div class="input-area">
-          <input type="password" name="Password" required placeholder="Password" [(ngModel)]="value.password">
-        </div>
-      </div>
-      <input type="submit" value="Sign up" [disabled]="form.invalid">
     </form>
-    <div class="sign-txt">Already member ? <a (click)="loginRoute()" >Sign up now !</a></div>
-  </div>
-</div>
+
+    <div class="sign-txt">Already member ? <a (click)="loginRoute()">Log in now !</a></div>
 

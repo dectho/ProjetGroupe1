@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="emitArtistCreation()">
+<form [formGroup]="form" (ngSubmit)="emitArtistCreation()" *ngIf="adminConnectedBool == true" (dblclick)="autoComplete()">
 
   <label>
     Stage name :

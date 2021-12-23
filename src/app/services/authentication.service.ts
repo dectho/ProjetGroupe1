@@ -21,7 +21,7 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(pseudo: string, password: string) {
+    /*login(pseudo: string, password: string) {
         return this.http.post<any>(`${environment.apiUrl}/User`, { pseudo, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
@@ -34,7 +34,7 @@ export class AuthenticationService {
                 return user;
             }));
     }
-/*
+
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {EventType} from "./event-bus/event-type";
+import {EventBusService} from "./event-bus/event-bus.service";
 
 @Component({
   selector: 'app-root',
@@ -6,19 +8,32 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnDestroy{
   title = 'ProjetGroupe1';
-  //currentUser: User;
 
-  /**constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  constructor(private eventBus:EventBusService) {
   }
 
-  logout() {
-    this.authenticationService.logout();
-    this.router.navigate(['/login']);
-  }*/
+  ngOnInit(): void {
+    let token : any = JSON.parse(<string>localStorage.getItem("token"));
+    if(token == null)
+    {
+      this.eventBus.next({
+        type: EventType.DISCONNECTED,
+        data:null
+      });
+    }
+    else
+    {
+      this.eventBus.next({
+        type: EventType.ADMIN_CONNECTED,
+        data:token
+      });
+    }
+  }
+
+  ngOnDestroy():void
+  {
+
+  }
 }

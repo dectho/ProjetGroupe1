@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {InfoComponent} from "./info/info.component";
 import {HomeComponent} from "./home/home.component";
@@ -9,6 +8,7 @@ import {TicketsComponent} from "./tickets/tickets.component";
 import {LoginComponent} from "./login/login.component";
 import {SignUpComponent} from "./login/sign-up/sign-up.component";
 import {AdminComponent} from "./admin/admin.component";
+import {AuthGuard} from "./_guards";
 
 //IMPORT APPROUTINGMODULE DANS APPMODULE
 const routes:Routes = [
@@ -16,7 +16,7 @@ const routes:Routes = [
     path: '', pathMatch: 'full', redirectTo:'home'
   },
   {
-    path: 'home', component:HomeComponent//, canActivate: [AuthGuard]
+    path: 'home', component:HomeComponent
   },
   {
     path:'info', component: InfoComponent

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {EventType} from "../event-bus/event-type";
+import {EventBusService} from "../event-bus/event-bus.service";
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

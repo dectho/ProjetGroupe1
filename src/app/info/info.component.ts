@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {EventBusService} from "../event-bus/event-bus.service";
+import {EventType} from "../event-bus/event-type";
 
 
 @Component({
@@ -14,6 +16,7 @@ export class InfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 

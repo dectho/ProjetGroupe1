@@ -1,10 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Artist} from "../../artist";
 import {MusicService} from "../../music.service";
 import {Guid} from "guid-typescript";
 import {Music} from "../../music";
 import {Schedule} from "../../schedule";
 import {ScheduleService} from "../../schedule.service";
+import {Subscription} from "rxjs";
+import {EventType} from "../../event-bus/event-type";
+import {EventBusService} from "../../event-bus/event-bus.service";
 
 @Component({
   selector: 'app-artist-list',
@@ -14,16 +17,29 @@ import {ScheduleService} from "../../schedule.service";
 export class ArtistListComponent implements OnInit {
 
   @Input() artists : Artist[] = [];
+  @Output() artistDeleted: EventEmitter<Artist> = new EventEmitter<Artist>();
 
   musics : Music [] = [];
 
   scheduls : Schedule[] = [];
 
-  constructor(private musicService : MusicService, private schedulService : ScheduleService) { }
+  private adminConnected: Subscription | any = null;
+  token : any = null;
+  adminConnectedBool : boolean;
+
+  constructor(private musicService : MusicService, private schedulService : ScheduleService, private eventBus:EventBusService) { }
 
   ngOnInit(): void {
     this.getAllMusics();
     this.getAllScheduls();
+
+    this.eventBus.when(EventType.ADMIN_CONNECTED).subscribe(tok =>
+    {
+      this.token = tok;
+      this.adminConnectedBool = true;
+    });
+    this.adminConnected = this.eventBus.when(EventType.DISCONNECTED).subscribe(tok => this.token = tok);
+
   }
 
   private getAllMusics() {
@@ -76,5 +92,9 @@ export class ArtistListComponent implements OnInit {
       }
     }
     return new Date();
+  }
+
+  emitTodoDeletedByIndex(i:number) {
+    this.artistDeleted.next(this.artists[i]);
   }
 }

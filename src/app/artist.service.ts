@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHandler} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import {Observable} from "rxjs";
 import {Music} from "./music";
 import {Artist} from "./artist";
 import {Guid} from "guid-typescript";
+import {JwtInterceptor} from "./_helpers";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ArtistService {
 
   //L'URL VIENT DE LA CLASSE ENVIRONNEMENT
   private static readonly API_URL: string = environment.apiUrl + "/Artist";
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient, private jwt : JwtInterceptor) { }
 
   getAll():Observable<Artist[]>
   {

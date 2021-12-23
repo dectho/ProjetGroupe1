@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {Artist} from "../../artist";
 import {Music} from "../../music";
@@ -7,7 +7,9 @@ import {Guid} from "guid-typescript";
 import {MusicService} from "../../music.service";
 import {Schedule} from "../../schedule";
 import {ScheduleService} from "../../schedule.service";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
+import {EventType} from "../../event-bus/event-type";
+import {EventBusService} from "../../event-bus/event-bus.service";
 
 @Component({
   selector: 'app-artist-form',
@@ -17,6 +19,7 @@ import {Observable} from "rxjs";
 export class ArtistFormComponent implements OnInit {
 
   @Output() artistCreated : EventEmitter<Artist> = new EventEmitter<Artist>();
+  @Input() artists:Artist[] = [];
 
   form:FormGroup = this.fb.group({
     stageName : ['', Validators.required],
@@ -26,71 +29,54 @@ export class ArtistFormComponent implements OnInit {
     scheduleEnd : ['', Validators.required]
   });
 
-  constructor(private fb : FormBuilder, private scheduleService : ScheduleService, private musicService : MusicService, private artistService : ArtistService) { }
+  private adminConnected: Subscription | any = null;
+  token : any = null;
+  adminConnectedBool : boolean;
+
+  constructor(private fb : FormBuilder, private artistService : ArtistService, private eventBus:EventBusService) { }
+
 
   ngOnInit(): void {
 
+    this.eventBus.when(EventType.ADMIN_CONNECTED).subscribe(tok =>
+    {
+      this.token = tok;
+      this.adminConnectedBool = true;
+    });
+    this.adminConnected = this.eventBus.when(EventType.DISCONNECTED).subscribe(tok => this.token = tok);
   }
 
   emitArtistCreation() {
 
-    /*let guidMusic : Guid = Guid.create();
-    let guidSchedule : Guid = Guid.create();
-    let guidArtist : Guid = Guid.create();*/
 
     let music = <Music>{
       title: this.form.value.musicName,
       link: this.form.value.linkMusic
     };
 
-    let schedule = <Schedule>{
+    let schedules = <Schedule>{
       scheduleStart: this.form.value.scheduleStart,
       scheduleEnd: this.form.value.scheduleEnd
     };
 
-    this.musicService.create(music).subscribe();
-    this.scheduleService.create(schedule).subscribe();
-
-    let listeMusic: Observable<Music[]> = this.musicService.getAll();
-    //let listeSchedule: Observable<Schedule[]> = this.scheduleService.getAll();
-
-    let guidM: Guid = Guid.createEmpty();
-    //let guidS: Guid = Guid.create();
-
-    listeMusic.subscribe(value => {
-      for (let i = 0; i < value.length; i++) {
-        if(value[i].title == "carnaval-song") {
-          guidM = value[i].id;
-          console.log(guidM);
-        }
-      }
-    });
-
-   /* listeSchedule.subscribe(value => {
-      for (let i = 0; i < value.length; i++) {
-        if(value[i].scheduleStart == schedule.scheduleStart) {
-          guidS = value[i].id;
-          console.log(guidS);
-        }
-      }
-    });*/
-
-    /*let guidMu: string = "29c48d19-63e1-4de7-97e5-08d9c24ae33f";
-    let guidUnk: unknown = guidMu as unknown;
-    let guidGuid: Guid = guidUnk as Guid;
-    console.log(guidGuid);*/
-
-    let guidMuS: string = "5377b98d-fb46-4199-80e1-08d9c24b06e5";
-    let guidUnkS: unknown = guidMuS as unknown;
-    let guidGuidS: Guid = guidUnkS as Guid;
-    console.log(guidGuidS);
-
      let  artiste = <Artist>{
        stageName: this.form.value.stageName,
-       idMusic: guidM,
-       idSchedule:guidGuidS
+       music:music,
+       schedules:schedules
      };
 
-    this.artistService.create(artiste).subscribe();
+     this.artistCreated.next(artiste);
+  }
+
+  autoComplete() {
+    this.form.setValue(
+      {
+        stageName : "Tymo",
+        musicName : "We Like To Party",
+        linkMusic : "https://www.youtube.com/watch?v=xRcSOLMGoc8",
+        scheduleStart :"2022-07-12T12:00",
+        scheduleEnd :"2022-07-12T14:00"
+      }
+    );
   }
 }
