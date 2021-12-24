@@ -22,19 +22,21 @@ export class LineUpComponent implements OnInit {
   adminConnectedBool : boolean;
   token : any;
 
-
   constructor(private artistService : ArtistService,
               private eventBus:EventBusService,
               private setUpService : SetUpService) { }
 
 
   ngOnInit(): void {
+    // Recup the list of all artists in database
     this.getAllArtists();
 
+    // Create the token with the eventbus
     this.eventBus.when(EventType.CONNECTED).subscribe(tok =>
     {
       this.token = tok;
 
+      // Set the variable adminConnected to true or false if a admin is connected
       this.setUpService.getUserRoles(this.token.sub).subscribe(value =>
       {
         for(let role of value)
@@ -52,15 +54,14 @@ export class LineUpComponent implements OnInit {
 
     });
     this.eventBus.when(EventType.DISCONNECTED).subscribe(value => this.adminConnectedBool = false);
-
-
-
   }
 
   private getAllArtists() {
     this.artistService.getAll().subscribe(artists => this.artists = artists);
 
   }
+
+  // Push an artist into the list
 
   sendArtist(art: Artist) {
     this.artistService.create(art).subscribe(artist =>
@@ -70,6 +71,8 @@ export class LineUpComponent implements OnInit {
       this.artists.push(art)
     });
   }
+
+  // Delete an artist in the db
 
   deleteArtist(artistDeleted: Artist) {
     this.artistService.delete(artistDeleted.id || -1).subscribe(() => {

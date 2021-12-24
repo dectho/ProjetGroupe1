@@ -19,7 +19,12 @@ import {SetUpService} from "../../set-up.service";
 })
 export class ArtistFormComponent implements OnInit {
 
+  // Used to send an artist at the parent component
+
   @Output() artistCreated : EventEmitter<Artist> = new EventEmitter<Artist>();
+
+  // Used to receive if an admin is connected
+
   @Input() adminConnectedBool : boolean;
 
   form:FormGroup = this.fb.group({
@@ -42,8 +47,9 @@ export class ArtistFormComponent implements OnInit {
 
   }
 
-  emitArtistCreation() {
+  // Create an artist
 
+  emitArtistCreation() {
 
     let music = <Music>{
       title: this.form.value.musicName,
@@ -63,6 +69,8 @@ export class ArtistFormComponent implements OnInit {
 
      this.artistCreated.next(artiste);
   }
+
+  // Autocompletion at double click
 
   autoComplete() {
     this.form.setValue(

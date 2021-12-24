@@ -20,6 +20,8 @@ export class TicketsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // You can buy a ticket and link it to a user with differents jwt
+
   buyTicket() {
 
     let token : any = localStorage.getItem("token");

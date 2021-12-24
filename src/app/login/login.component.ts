@@ -72,6 +72,8 @@ export class LoginComponent implements OnInit {
       password : this.f['password'].value
     };
 
+    // Login a user if he exists
+
     this.authentificationService.login(user).subscribe(data =>
       {
 
@@ -108,6 +110,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+// Navigate to the page signup
 
   signup() {
     this.router.navigate(['signup']);
