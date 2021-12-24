@@ -25,6 +25,8 @@ export class AdminComponent implements OnInit {
     this.getAllUsers();
   }
 
+  // Used to display the list of users
+
   private getAllUsers() {
     this.setUpService.getAllUsers().subscribe(users =>
     {
@@ -56,6 +58,7 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['admin']);
   }
 
+  // Used to change the role of a user but not implemented TODO
 
   switchRole(userName : string) {
     this.setUpService.getUserRoles(userName).subscribe(value => {

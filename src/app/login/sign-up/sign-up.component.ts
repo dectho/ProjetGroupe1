@@ -58,7 +58,7 @@ export class SignUpComponent implements OnInit {
 
 
 
-
+  // Create a user with jwt
     this.authentificationService.register(user).subscribe(data =>
       {
         this.errorBool = false;

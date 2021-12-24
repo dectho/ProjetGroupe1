@@ -16,6 +16,9 @@ export class MapComponent implements AfterViewInit {
     this.createMap();
   }
 
+  // Create a map and set his position to the center
+  // Set the level of zoom
+
   createMap() {
     const zoomLevel = 30;
     var map = L.map('map', {
@@ -30,6 +33,8 @@ export class MapComponent implements AfterViewInit {
     });
 
     mainLayer.addTo(map);
+
+    // Create an icon for the cursor
 
     var myIcon = L.icon({
       // iconUrl: 'my-icon.png',

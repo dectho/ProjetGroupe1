@@ -70,7 +70,7 @@ export class MenuBarComponent implements OnInit {
     this.router.navigate(['login']);
 
   }
-
+  // If user is not connected, when he clicks on tickets he is sended to login
   checkConnected() {
     if(this.connected == true)
     {
