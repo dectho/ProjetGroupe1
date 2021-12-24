@@ -14,6 +14,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
   token : any;
 
+    //The method is call every time that a http request is call
   intercept(request: HttpRequest<unknown>,next: HttpHandler): Observable<HttpEvent<unknown>> {
         let tok : any = localStorage.getItem("token");
 

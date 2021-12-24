@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {User} from "../../user";
 import jwt_decode from "jwt-decode";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthManagementService} from "../../auth-management.service";
