@@ -15,7 +15,7 @@
       <span>
         <a href={{getMusicLink(artist.idMusic)}} target="_blank">{{getMusicTitle(artist.idMusic)}}</a>
       </span>
-      <span *ngIf="adminConnectedBool == true"><button (click)="emitTodoDeletedByIndex(i)">X</button></span>
+      <span *ngIf="adminConnectedBool == true"><button (click)="emitTodoDeletedByIndex(i)" >X</button></span>
     </div>
   </div>
 </div>

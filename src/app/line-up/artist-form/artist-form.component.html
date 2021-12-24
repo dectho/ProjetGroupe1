@@ -2,23 +2,23 @@
 
   <label>
     Stage name :
-    <input type="text" formControlName="stageName" placeholder="Stage name">
+    <input type="text" formControlName="stageName" placeholder="Stage name" data-cy="inputStageName">
     <br>
     Music name :
-    <input type="text" formControlName="musicName" placeholder="Music name">
+    <input type="text" formControlName="musicName" placeholder="Music name" data-cy="inputMusicName">
     <br>
     Music link :
-    <input type="text" formControlName="linkMusic" placeholder="Music link">
+    <input type="text" formControlName="linkMusic" placeholder="Music link" data-cy="inputMusicLink">
     <br>
     Start time :
-    <input type="datetime-local" formControlName="scheduleStart" placeholder="Start time">
+    <input type="datetime-local" formControlName="scheduleStart" placeholder="Start time" data-cy="inputScheduleStart">
     <br>
     End time :
-    <input type="datetime-local" formControlName="scheduleEnd" placeholder="End time">
+    <input type="datetime-local" formControlName="scheduleEnd" placeholder="End time" data-cy="inputScheduleEnd">
     <br>
 
 
-  <input type="submit" value="Add artist" [disabled]="form.invalid">
+  <input type="submit" value="Add artist" [disabled]="form.invalid" data-cy="inputArtistSubmit">
   </label>
 
 </form>

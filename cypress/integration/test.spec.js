@@ -1,7 +1,7 @@
 describe('My first test', () => {
 
   it('data is loaded', () => {
-    cy.visit('http://localhost:4200/signup);
+    cy.visit("http://localhost:4200/signup");
 
     cy.get("[data-cy=inputSignUpPseudo]")
       .type("test");
@@ -20,7 +20,7 @@ describe('My second test', () => {
 
 
   it('data is loaded', () => {
-    cy.visit('http://localhost:4200/login%27);
+    cy.visit("http://localhost:4200/login");
 
     cy.get("[data-cy=inputPseudoLogin]")
       .type("test");
@@ -38,7 +38,7 @@ describe('My second test', () => {
       .type("We Like To Party");
 
     cy.get("[data-cy=inputMusicLink]")
-      .type("https://www.youtube.com/watch?v=xRcSOLMGoc8%22);
+      .type("https://www.youtube.com/watch?v=xRcSOLMGoc8%22");
 
     cy.get("[data-cy=inputScheduleStart]")
       .type("2022-07-12T12:00");
@@ -53,7 +53,7 @@ describe('My second test', () => {
     cy.get("[data-cy=0]")
       .click();
 
-    // cy.reload()
+    cy.reload()
   });
 
 });

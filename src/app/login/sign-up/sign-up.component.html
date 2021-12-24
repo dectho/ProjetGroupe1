@@ -5,18 +5,18 @@
       <div>
         <div class="field email">
           <div class="input-area">
-            <input type="text" id='pseudo' formControlName="pseudo" placeholder="Pseudo"/>
+            <input type="text" id='pseudo' formControlName="pseudo" placeholder="Pseudo" data-cy="inputSignUpPseudo"/>
 
           </div>
         </div>
         <div class="field password">
           <div class="input-area">
-            <input type="password" id='password' formControlName="password" placeholder="Password"/>
+            <input type="password" id='password' formControlName="password" placeholder="Password" data-cy="inputSignUpPassword"/>
           </div>
         </div>
 
 
-        <input type="submit" [disabled]="loginForm.invalid" value="Login">
+        <input type="submit" [disabled]="loginForm.invalid" value="Login" data-cy="submitSignUp">
 
         <div *ngIf="errorBool" class="error">
           <div class="error" *ngFor="let error of errorsString">{{error}}</div>
