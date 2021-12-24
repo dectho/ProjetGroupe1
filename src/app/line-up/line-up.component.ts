@@ -7,6 +7,7 @@ import {Guid} from "guid-typescript";
 import {Observable} from "rxjs";
 import {EventType} from "../event-bus/event-type";
 import {EventBusService} from "../event-bus/event-bus.service";
+import {SetUpService} from "../set-up.service";
 
 
 @Component({
@@ -18,12 +19,40 @@ export class LineUpComponent implements OnInit {
 
   artists: Artist[] = [];
 
+  adminConnectedBool : boolean;
+  token : any;
 
-  constructor(private artistService : ArtistService, private eventBus:EventBusService) { }
+
+  constructor(private artistService : ArtistService,
+              private eventBus:EventBusService,
+              private setUpService : SetUpService) { }
 
 
   ngOnInit(): void {
     this.getAllArtists();
+
+    this.eventBus.when(EventType.CONNECTED).subscribe(tok =>
+    {
+      this.token = tok;
+
+      this.setUpService.getUserRoles(this.token.sub).subscribe(value =>
+      {
+        for(let role of value)
+        {
+          if(role === "Admin")
+          {
+            this.adminConnectedBool = true;
+          }
+          else
+          {
+            this.adminConnectedBool = false;
+          }
+        }
+      });
+
+    });
+    this.eventBus.when(EventType.DISCONNECTED).subscribe(value => this.adminConnectedBool = false);
+
 
 
   }

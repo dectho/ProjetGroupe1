@@ -1,1 +1,26 @@
-
+<div id="container">
+  <div id="tableau">
+    <table class="styled-table">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Switch role</th>
+        <th>Ticket ?</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let u of users; let i = index">
+        <td>{{u.id}}</td>
+        <td>{{u.userName}}</td>
+        <td>{{map.get(u.userName)}}</td>
+        <td>
+          <button (click)="switchRole(u.userName)"></button>
+        </td>
+        <td>{{mapTicket.get(u.userName)}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

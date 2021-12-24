@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 import {Guid} from "guid-typescript";
 import {EventBusService} from "../event-bus/event-bus.service";
 import {EventType} from "../event-bus/event-type";
+import {UserLogin} from "../user-login";
 
 @Component({
   selector: 'app-login',
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    let user = <User>{
+    let user = <UserLogin>{
       pseudo : this.f['pseudo'].value,
       password : this.f['password'].value
     };
@@ -78,47 +79,21 @@ export class LoginComponent implements OnInit {
         this.value = data;
         this.token = this.value.token;
         this.tokenDecoded = this.getDecodedAccessToken(this.token);
-        //console.log(this.tokenDecoded.Id);
-
-        //localStorage.setItem("token", JSON.stringify(this.tokenDecoded));
-        //let tok : any = JSON.parse(<string>localStorage.getItem("token"));
 
         localStorage.setItem("token", this.token);
-        let tok : any = localStorage.getItem("token");
 
+        localStorage.setItem("tokenDecoded", JSON.stringify(this.tokenDecoded) );
 
-        if((user.pseudo == "test" && user.password == "Test1$") ||
-          (user.pseudo == "admin" && user.password == "Helha1$") )
-        {
-          this.loginAdmin(this.token);
-        }
-        else
-        {
-          this.loginUser(this.token);
-        }
+        this.eventBus.next({
+          type: EventType.CONNECTED,
+          data:this.tokenDecoded
+        });
 
-        //console.log(tok);
         this.router.navigate(['lineUp']);
       },
       error => {
         this.errorBool = true;
       });
-  }
-
-  loginAdmin(tok : any) {
-    this.eventBus.next({
-      type: EventType.ADMIN_CONNECTED,
-      data:tok
-    });
-
-  }
-
-  loginUser(tok : any) {
-    this.eventBus.next({
-      type: EventType.USER_CONNECTED,
-      data:tok
-    });
-
   }
 
   getDecodedAccessToken(token: string): any {

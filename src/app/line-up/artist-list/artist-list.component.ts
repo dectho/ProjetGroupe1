@@ -8,6 +8,7 @@ import {ScheduleService} from "../../schedule.service";
 import {Subscription} from "rxjs";
 import {EventType} from "../../event-bus/event-type";
 import {EventBusService} from "../../event-bus/event-bus.service";
+import {SetUpService} from "../../set-up.service";
 
 @Component({
   selector: 'app-artist-list',
@@ -19,26 +20,24 @@ export class ArtistListComponent implements OnInit {
   @Input() artists : Artist[] = [];
   @Output() artistDeleted: EventEmitter<Artist> = new EventEmitter<Artist>();
 
+  @Input() adminConnectedBool : boolean;
+
   musics : Music [] = [];
 
   scheduls : Schedule[] = [];
 
   private adminConnected: Subscription | any = null;
-  token : any = null;
-  adminConnectedBool : boolean;
 
-  constructor(private musicService : MusicService, private schedulService : ScheduleService, private eventBus:EventBusService) { }
+
+
+  constructor(private musicService : MusicService,
+              private schedulService : ScheduleService,
+              private eventBus:EventBusService,
+              private setUpService : SetUpService) { }
 
   ngOnInit(): void {
     this.getAllMusics();
     this.getAllScheduls();
-
-    this.eventBus.when(EventType.ADMIN_CONNECTED).subscribe(tok =>
-    {
-      this.token = tok;
-      this.adminConnectedBool = true;
-    });
-    this.adminConnected = this.eventBus.when(EventType.DISCONNECTED).subscribe(tok => this.token = tok);
 
   }
 

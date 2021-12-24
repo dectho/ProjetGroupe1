@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EventType} from "./event-bus/event-type";
 import {EventBusService} from "./event-bus/event-bus.service";
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent implements OnDestroy{
 
   ngOnInit(): void {
     let token : any = localStorage.getItem("token");
+    token = jwt_decode(token);
     if(token == null)
     {
       this.eventBus.next({
@@ -26,7 +28,7 @@ export class AppComponent implements OnDestroy{
     else
     {
       this.eventBus.next({
-        type: EventType.ADMIN_CONNECTED,
+        type: EventType.CONNECTED,
         data:token
       });
     }

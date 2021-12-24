@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthManagementService} from "../../auth-management.service";
 import {EventType} from "../../event-bus/event-type";
 import {EventBusService} from "../../event-bus/event-bus.service";
+import {UserLogin} from "../../user-login";
 
 @Component({
   selector: 'app-sign-up',
@@ -51,7 +52,7 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    let user = <User>{
+    let user = <UserLogin>{
       pseudo : this.f['pseudo'].value,
       password : this.f['password'].value
     };
@@ -66,15 +67,16 @@ export class SignUpComponent implements OnInit {
         this.token = this.value.token;
         this.tokenDecoded = this.getDecodedAccessToken(this.token);
 
-        localStorage.setItem("token", JSON.stringify(this.tokenDecoded));
-        let tok : any = JSON.parse(<string>localStorage.getItem("token"));
+        localStorage.setItem("token", this.token);
+
+        localStorage.setItem("tokenDecoded", this.tokenDecoded);
 
         this.eventBus.next({
-          type: EventType.ADMIN_CONNECTED,
-          data:tok
+          type: EventType.CONNECTED,
+          data:this.tokenDecoded
         });
 
-        this.router.navigate(['home']);
+        this.router.navigate(['lineUp']);
       },
       error => {
         this.errorsString = error.error.errors;

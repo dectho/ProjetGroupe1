@@ -8,6 +8,7 @@
     <li><a routerLink="merchandise" routerLinkActive="active">Merchandise</a></li>
     <li *ngIf="connected==false"><a routerLink="login" routerLinkActive="active">Login</a></li>
     <li *ngIf="connected==true"><a routerLink="Log Out" routerLinkActive="active" (click)="logOut()">Log Out</a></li>
+    <li *ngIf="adminConnected==true"><a routerLink="admin" routerLinkActive="active">Admin</a></li>
   </ul>
   <router-outlet></router-outlet>
 </div>

@@ -90,9 +90,11 @@
 
 
   <app-artist-list [artists]="artists"
-                   (artistDeleted)="deleteArtist($event)"></app-artist-list>
+                   (artistDeleted)="deleteArtist($event)"
+                   [adminConnectedBool]="adminConnectedBool"></app-artist-list>
 
-  <app-artist-form (artistCreated)="sendArtist($event)"></app-artist-form>
+  <app-artist-form (artistCreated)="sendArtist($event)"
+                   [adminConnectedBool]="adminConnectedBool"></app-artist-form>
 
 
 </div>

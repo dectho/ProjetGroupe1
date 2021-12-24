@@ -10,6 +10,7 @@ import {ScheduleService} from "../../schedule.service";
 import {Observable, Subscription} from "rxjs";
 import {EventType} from "../../event-bus/event-type";
 import {EventBusService} from "../../event-bus/event-bus.service";
+import {SetUpService} from "../../set-up.service";
 
 @Component({
   selector: 'app-artist-form',
@@ -19,7 +20,7 @@ import {EventBusService} from "../../event-bus/event-bus.service";
 export class ArtistFormComponent implements OnInit {
 
   @Output() artistCreated : EventEmitter<Artist> = new EventEmitter<Artist>();
-  @Input() artists:Artist[] = [];
+  @Input() adminConnectedBool : boolean;
 
   form:FormGroup = this.fb.group({
     stageName : ['', Validators.required],
@@ -30,20 +31,15 @@ export class ArtistFormComponent implements OnInit {
   });
 
   private adminConnected: Subscription | any = null;
-  token : any = null;
-  adminConnectedBool : boolean;
 
-  constructor(private fb : FormBuilder, private artistService : ArtistService, private eventBus:EventBusService) { }
+  constructor(private fb : FormBuilder,
+              private artistService : ArtistService,
+              private eventBus:EventBusService,
+              private setUpService : SetUpService) { }
 
 
   ngOnInit(): void {
 
-    this.eventBus.when(EventType.ADMIN_CONNECTED).subscribe(tok =>
-    {
-      this.token = tok;
-      this.adminConnectedBool = true;
-    });
-    this.adminConnected = this.eventBus.when(EventType.DISCONNECTED).subscribe(tok => this.token = tok);
   }
 
   emitArtistCreation() {

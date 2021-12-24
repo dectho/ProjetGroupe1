@@ -37,16 +37,6 @@ export class ArtistService {
 
   delete(id:Guid):Observable<any>
   {
-    /*let art : Observable<any> = this.getById(id);
-    let idMusic : Guid = Guid.create();
-    let idSchedule : Guid = Guid.create();
-    art.subscribe(value =>
-    {
-      idMusic = value.idMusic;
-      idSchedule = value.idSchedule;
-    });
-    this.musicService.delete(idMusic);
-    this.scheduleService.delete(idSchedule);*/
     return this.httpClient.delete(ArtistService.API_URL + "/" + id);
   }
 

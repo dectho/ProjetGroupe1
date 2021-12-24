@@ -1,1 +1,37 @@
-<p>tickets works!</p>
+<div id="image"><img src="/assets/images/ticket.png"></div>
+
+<div class="message" *ngIf="messageBool==true">{{message}}</div>
+<div id="error" class="message" *ngIf="errorBool==true">{{error}}</div>
+<div class="policy-container">
+  <div class="policy-table">
+    <div class="headings">
+      <span class="heading">A kind of ticket</span>
+      <span class="heading">Buy</span>
+    </div>
+
+    <div class="policy">
+      <span >1-day ticket - 12/07/22</span>
+      <span><button (click)="buyTicket()">Buy</button></span>
+    </div>
+    <div class="policy">
+      <span >1-day ticket - 13/07/22</span>
+      <span><button (click)="buyTicket()">Buy</button></span>
+    </div>
+    <div class="policy">
+      <span >1-day ticket - 14/07/22</span>
+      <span><button (click)="buyTicket()">Buy</button></span>
+    </div>
+    <div class="policy">
+      <span >1-day ticket - 15/07/22</span>
+      <span><button (click)="buyTicket()">Buy</button></span>
+    </div>
+    <div class="policy">
+      <span >1-day ticket - 16/07/22</span>
+      <span><button (click)="buyTicket()">Buy</button></span>
+    </div>
+    <div class="policy">
+      <span>Ticket for all days - from 12/07/22 to 16/07/22</span>
+      <span><button (click)="buyTicket()">Buy</button></span>
+    </div>
+  </div>
+</div>
